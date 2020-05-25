@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="1383" started-at="2020-05-25T12:02:22Z" finished-at="2020-05-25T12:02:23Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="1383" started-at="2020-05-25T12:02:22Z" finished-at="2020-05-25T12:02:23Z">
+      <class name="RestAssured_Employee.RestAssured_Employees.Action.EmployeeAPI">
+        <test-method status="PASS" signature="getEmployeeID()[pri:0, instance:RestAssured_Employee.RestAssured_Employees.Action.EmployeeAPI@339bf286]" name="getEmployeeID" duration-ms="1013" started-at="2020-05-25T12:02:22Z" finished-at="2020-05-25T12:02:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getEmployeeID -->
+        <test-method status="PASS" signature="CheckTotalSizeOfEmployee()[pri:1, instance:RestAssured_Employee.RestAssured_Employees.Action.EmployeeAPI@339bf286]" name="CheckTotalSizeOfEmployee" duration-ms="56" started-at="2020-05-25T12:02:23Z" finished-at="2020-05-25T12:02:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CheckTotalSizeOfEmployee -->
+      </class> <!-- RestAssured_Employee.RestAssured_Employees.Action.EmployeeAPI -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
