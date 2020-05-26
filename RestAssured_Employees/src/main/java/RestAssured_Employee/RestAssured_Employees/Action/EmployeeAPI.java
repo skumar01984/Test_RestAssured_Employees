@@ -26,12 +26,13 @@ public class EmployeeAPI extends Config {
 	List<Map<Object, Object>> employeeList = null;
 
 	public EmployeeAPI() {
-		response = given().contentType(ContentType.TEXT).get(Config.employeeURL);
+		response = given().contentType(ContentType.TEXT).get(employeeURL);
 		String text = response.then().statusCode(200).extract().body().asString();
 
 		// String[] extractJson = text.replace("},", "}").replace("....",
 		// "").split("<pre>");
-		String[] extractJson = text.replace("....", "{}").split("<pre>");
+		String[] extractJson = text.replace("....", employeeData).split("<pre>");
+
 		json = extractJson[1].split("</pre>");
 		System.out.println("=================================== \n" + json[0]);
 
@@ -42,15 +43,15 @@ public class EmployeeAPI extends Config {
 		try {
 			jsonPath = new JsonPath(json[0]);
 
-			// First Way : to get number of employee from list
+			// First Way by get value: to get number of employee from list
 
 			int numFromsResponse = jsonPath.getInt("data.id.size()");
-			System.out.println("1 way using Json Parser: Total no. of employee : " + numFromsResponse);
+			System.out.println("1 way using by get value: Total no. of employee : " + numFromsResponse);
 
-			// Second Way : to get number of employee from list
+			// Second Way by get list : to get number of employee from list
 
 			employeeList = jsonPath.getList("data");
-			System.out.println("2 way using List: Total no. of employee : " + employeeList.size());
+			System.out.println("2 way by get List: Total no. of employee : " + employeeList.size());
 
 			assertEquals(employeeList.size(), 2);
 
@@ -66,7 +67,7 @@ public class EmployeeAPI extends Config {
 			// To get the employee data id from list
 
 			jsonPath = new JsonPath(json[0]);
-			
+
 			// 1. Way : To get the second employee id using json parser
 
 			String id = jsonPath.getString("data.id[1]");
@@ -75,40 +76,44 @@ public class EmployeeAPI extends Config {
 			// Extracted Json will return null
 
 			if (id == null) {
-				System.out.println("Second employee data is not present in the response text." + id);
+				System.out.println("Second employee id is not present in the response text." + id);
 			} else {
-				System.out.println("Second employee data is present in the response text." + id);
+				System.out.println("Second employee id is present in the response text." + id);
 			}
 
-			System.out.println("=======================================================================");
+			System.out.println("=======================================================================\n");
 			// assertEquals(id, null);
 
 			// 2. Way using Has Map : To get the second employee id using Has Map
 			if (employeeList.size() > 1) {
 
-				/*
-				 * employeeList.forEach(empData -> { System.out.println("Employee Data is : " +
-				 * empData); });
-				 */
+				employeeList.forEach(empData -> {
+					System.out.println("Employee Data is : " + empData);
+				});
+				System.out.println("=======================================================================\n");
+
 				String empkey = null, empValue = null;
-				for (int i = 0; i < employeeList.size(); i++) {
+				for (int i = 1; i < employeeList.size(); i++) {
 
 					Map<Object, Object> map = employeeList.get(i);
 					if (map.containsKey("id")) {
 						for (Map.Entry<Object, Object> entry : map.entrySet()) {
 							empkey = entry.getKey().toString();
 							empValue = entry.getValue().toString();
-							// System.out.println("key: " + empkey + " value: " + empValue);
+							System.out.println("Second employee data as key: " + empkey + " value: " + empValue);
 
-							if (empkey.equals("id")) {
-								System.out.println(
-										"First employee id is present in the JSON. as Key : " + empkey + " ==> " + empValue);
-								System.out.println("=================================================================");
-							}
+							/*
+							 * if (empkey.equals("id")) {
+							 * System.out.println("Second employee data is present in the JSON. as Key : " +
+							 * empkey + " ==> " + empValue); System.out.println(
+							 * "================================================================="); }
+							 */
 
 						}
 
 					} else {
+						empkey = null;
+						empValue = null;
 						System.out.println("Second employee data is not present in the JSON. as Key : " + empkey
 								+ " ==> " + empValue);
 						System.out.println("=======================================================================");
