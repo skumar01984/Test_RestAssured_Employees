@@ -87,11 +87,11 @@ public class EmployeeAPI extends Config {
 			// 2. Way using Has Map : To get the second employee id using Has Map
 			if (employeeList.size() > 1) {
 
-				employeeList.forEach(empData -> {
-					System.out.println("Employee Data is : " + empData);
-				});
-				System.out.println("=======================================================================\n");
-
+				/*
+				 * employeeList.forEach(empData -> { System.out.println("Employee Data is : " +
+				 * empData); }); System.out.println(
+				 * "=======================================================================\n");
+				 */
 				String empkey = null, empValue = null;
 				for (int i = 1; i < employeeList.size(); i++) {
 
